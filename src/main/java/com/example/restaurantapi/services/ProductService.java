@@ -1,7 +1,7 @@
 package com.example.restaurantapi.services;
 
-import com.example.restaurantapi.entity.Product;
-import com.example.restaurantapi.entity.repository.ProductRepository;
+import com.example.restaurantapi.Model.Product;
+import com.example.restaurantapi.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

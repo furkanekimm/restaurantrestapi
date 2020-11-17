@@ -1,10 +1,9 @@
-package com.example.restaurantapi.entity;
+package com.example.restaurantapi.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.PrimitiveIterator;
 
 @Entity
 public class Product {
@@ -20,11 +19,7 @@ public class Product {
 
     }
 
-    public Product(String productName, String description, Long price) {
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-    }
+
 
     public Long getId() {
         return id;
@@ -56,5 +51,10 @@ public class Product {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return productName;
     }
 }
