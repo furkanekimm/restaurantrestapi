@@ -15,8 +15,8 @@ public class Product {
     private String description;
     private Long price;
 
-    
-    public Product(){
+
+    public Product() {
 
     }
 
