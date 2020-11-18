@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ProductService from '../services/ProductService';
-
+import './card-style.css';
 
 class ListProductComponent extends Component {
     constructor(props) {
