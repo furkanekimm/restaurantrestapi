@@ -20,5 +20,20 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public Product getProductById( Long id){
+        Product product = productRepository.findById(id).get();
+        return product;
+    }
+
+    public void deleteProduct(Long id) {
+        // allNews.removeIf(article -> article.getId() == id);
+        productRepository.deleteById(id);
+    }
+
+    public Product updateProduct(Product product) {
+        productRepository.saveAndFlush(product);
+        return product;
+    }
+
 
 }

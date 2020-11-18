@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {Container, Card} from 'react-bootstrap'
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

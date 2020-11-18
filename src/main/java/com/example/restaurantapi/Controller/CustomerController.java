@@ -19,7 +19,7 @@ public class CustomerController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/productlist")
+    @GetMapping("/")
     public List<Product> listAllProducts(){
         return productService.listAllProduct();
     }
