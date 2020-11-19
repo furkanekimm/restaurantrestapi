@@ -4,11 +4,14 @@ class CreateProductComponent extends Component {
     constructor(props) {
         super(props)
 
-        this.state = {          
+        this.state = {
+            category:'',
             productName:'',
             description: '',
             price: ''
+
         }
+        this.changeCategoryHandler = this.changeCategoryHandler.bind(this);
         this.changeProductNameHandler = this.changeProductNameHandler.bind(this);
         this.changeDescriptionHandler = this.changeDescriptionHandler.bind(this);
         this.changePriceHandler = this.changePriceHandler.bind(this);
@@ -18,6 +21,7 @@ class CreateProductComponent extends Component {
     saveProduct = (e) => {
         e.preventDefault();
         let products = {
+            category: this.state.category,
             productName: this.state.productName,
             description: this.state.description,
             price: this.state.price
@@ -27,6 +31,9 @@ class CreateProductComponent extends Component {
             this.props.history.push('/');
         });
 
+    }
+    changeCategoryHandler=(event) =>{
+        this.setState({category: event.target.value})
     }
     changeProductNameHandler = (event) => {
         this.setState({productName: event.target.value})
@@ -53,9 +60,14 @@ class CreateProductComponent extends Component {
                         <div className="card-body">
                             <form>
                                 <div className="form-group">
-                                    <label> Title </label>
+                                    <label> Category </label>
+                                    <input placeholder="Category" name="category" className="form-control"
+                                           value={this.state.category} onChange={this.changeCategoryHandler}/>
+                                </div>
+                                <div className="form-group">
+                                    <label> Product Name </label>
                                     <input placeholder="Product Name" name="productName" className="form-control"
-                                           value={this.state.title} onChange={this.changeProductNameHandler}/>
+                                           value={this.state.productName} onChange={this.changeProductNameHandler}/>
                                 </div>
                                 <div className="form-group">
                                     <label> Description </label>
@@ -63,9 +75,9 @@ class CreateProductComponent extends Component {
                                            value={this.state.description} onChange={this.changeDescriptionHandler}/>
                                 </div>
                                 <div className="form-group">
-                                    <label> Image Url </label>
+                                    <label> Price </label>
                                     <input placeholder="Price" name="price" className="form-control"
-                                           value={this.state.urlToImage} onChange={this.changePriceHandler}/>
+                                           value={this.state.price} onChange={this.changePriceHandler}/>
                                 </div>
                                 <button className="btn btn-success" onClick={this.saveProduct}>Save</button>
                                 <button className="btn btn-danger" onClick={this.cancel.bind(this)}

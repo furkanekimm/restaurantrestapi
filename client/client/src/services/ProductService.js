@@ -8,6 +8,17 @@ class ProductService{
     listAllProduct(){
         return axios.get(PRODUCT_API_BASE_URL);
     }
+    listAllCategory(){
+        return axios.get(PRODUCT_API_BASE_URL+"/category")
+    }
+
+    listProductByCategory(categories){
+        return axios.get(PRODUCT_API_BASE_URL+"category/product",{
+            params: {
+                category: categories
+            }
+        })
+    }
 
 
 }

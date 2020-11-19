@@ -13,13 +13,30 @@ public class Product {
     private String productName;
     private String description;
     private Long price;
+    private String category;
+    private String urlToImage;
 
 
     public Product() {
 
     }
 
+    public String getUrlToImage() {
+        return urlToImage;
+    }
 
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public Long getId() {
         return id;

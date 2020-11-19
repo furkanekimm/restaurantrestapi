@@ -40,7 +40,8 @@ class ListProductComponent extends Component {
                     <table className="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Name</th>
                             <th>Description</th>
                             <th>Price</th>
                             <th>Actions</th>
@@ -51,6 +52,7 @@ class ListProductComponent extends Component {
                             this.state.products.map(
                                 products =>
                                     <tr key={products.id}>
+                                        <td>{products.category}</td>
                                         <td>{products.productName}</td>
                                         <td>{products.description}</td>
                                         <td>{products.price}</td>
