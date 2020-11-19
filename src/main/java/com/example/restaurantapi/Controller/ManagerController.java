@@ -42,7 +42,4 @@ public class ManagerController {
         return productService.updateProduct(product);
     }
 
-
-
-
 }

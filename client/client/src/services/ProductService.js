@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const PRODUCT_API_BASE_URL = "http://localhost:8080/products/"
+const CART_BASE_URL ="http://localhost:8080/"
 
 class ProductService{
 
@@ -18,6 +19,10 @@ class ProductService{
                 category: categories
             }
         })
+    }
+
+    saleButton(Carts){
+        return axios.post(CART_BASE_URL+"carts/add",Carts)
     }
 
 

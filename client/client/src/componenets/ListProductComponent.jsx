@@ -12,7 +12,7 @@ class ListProductComponent extends Component {
             products: [],
             cart: {
                 cartId: 0,
-                id: 0,
+                productId: 0,
                 piece: 1,
                 productName: '',
                 price: 0,
@@ -30,6 +30,12 @@ class ListProductComponent extends Component {
             this.setState({products: res.data});
         });
         this.render();
+    }
+
+    saleButton(Carts){
+        ProductService.saleButton(Carts).then(res =>{
+            this.props.history.push('/');
+        });
     }
 
     increasePiece(cart) {
@@ -53,21 +59,26 @@ class ListProductComponent extends Component {
     }
 
     addCarts(products) {
-        if(products.id==this.state.cart.id){
-            this.cart.piece+=1;
-            this.setState({carts: [...this.state.carts, this.state.cart]})
-        }
         this.state.totalCart += products.price;
-        this.setState({
-            cart: {
-                cartId: nextId(),
-                id: products.id,
-                productName: products.productName,
-                price: products.price,
-                piece: 1,
-                total: products.price
-            }
-        }, () => this.setState({carts: [...this.state.carts, this.state.cart]}))
+        if(this.state.carts.filter(cart => cart.productId==products.id).length>0){
+            var cart = this.state.carts.filter(cart => cart.productId==products.id)
+            cart[0].piece+=1;
+            cart[0].total = cart[0].total + cart[0].price;
+            this.setState([{...this.state.carts, [cart[0].productId]: cart[0]}])
+        }
+        else{
+            this.setState({
+                cart: {
+                    cartId: nextId(),
+                    productId: products.id,
+                    productName: products.productName,
+                    price: products.price,
+                    piece: 1,
+                    total: products.price
+                }
+            }, () => this.setState({carts: [...this.state.carts, this.state.cart]}))
+        }
+
     }
 
     componentDidMount() {
@@ -162,7 +173,7 @@ class ListProductComponent extends Component {
                                 <th>{this.state.totalCart} ₺</th>
                                 <th>
                                     <button className="btn btn-outline-danger"
-                                            onClick={() => this.saleButton()}>Payment
+                                            onClick={() => this.saleButton(this.state.carts)}>Payment
                                     </button>
                                 </th>
                             </tr>
