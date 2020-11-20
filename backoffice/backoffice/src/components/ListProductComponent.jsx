@@ -9,7 +9,7 @@ class ListProductComponent extends Component {
             products: []
         }
         this.editProduct=this.editProduct.bind(this);
-        this.addProduct=this.addProduct.bind(this);
+        //this.addProduct=this.addProduct.bind(this);
         this.deleteProduct=this.deleteProduct.bind(this);
     }
     deleteProduct(id){
@@ -17,9 +17,9 @@ class ListProductComponent extends Component {
             this.setState({products: this.state.products.filter(products => products.id !== id)});
         });
     }
-    addProduct() {
+   /* addProduct() {
         this.props.history.push('/add');
-    }
+    }*/
     editProduct(id) {
         this.props.history.push(`/update/${id}`);
     }
@@ -33,9 +33,9 @@ class ListProductComponent extends Component {
         return (
             <div>
                 <h2 className="text-center">Product List</h2>
-                <div className="row">
+                {/*<div className="row">
                     <button style={{marginBottom: "10px"}} className="btn btn-primary" onClick={this.addProduct}>Add Product</button>
-                </div>
+                </div>*/}
                 <div className="row">
                     <table className="table table-striped table-bordered">
                         <thead>

@@ -23,6 +23,7 @@ public class Cart {
     private Long total;
     private Long productId;
 
+
     public Long getProductId() {
         return productId;
     }

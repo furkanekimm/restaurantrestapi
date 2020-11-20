@@ -32,9 +32,9 @@ class ListProductComponent extends Component {
         this.render();
     }
 
-    saleButton(Carts){
-        ProductService.saleButton(Carts).then(res =>{
-            this.props.history.push('/');
+    saleButton(Carts) {
+        ProductService.saleButton(Carts).then(res => {
+            window.location.reload();
         });
     }
 
@@ -60,13 +60,12 @@ class ListProductComponent extends Component {
 
     addCarts(products) {
         this.state.totalCart += products.price;
-        if(this.state.carts.filter(cart => cart.productId==products.id).length>0){
-            var cart = this.state.carts.filter(cart => cart.productId==products.id)
-            cart[0].piece+=1;
+        if (this.state.carts.filter(cart => cart.productId == products.id).length > 0) {
+            var cart = this.state.carts.filter(cart => cart.productId == products.id)
+            cart[0].piece += 1;
             cart[0].total = cart[0].total + cart[0].price;
             this.setState([{...this.state.carts, [cart[0].productId]: cart[0]}])
-        }
-        else{
+        } else {
             this.setState({
                 cart: {
                     cartId: nextId(),
@@ -92,17 +91,20 @@ class ListProductComponent extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-2">
-                        {
-                            this.state.categories.map(
-                                categories =>
-                                    <tr key={categories}>
-                                        <button style={{width: "200px"}}
-                                                onClick={() => this.listProductByCategory(categories)}
-                                                className="btn btn-success"> {categories}
-                                        </button>
-                                    </tr>
-                            )
-                        }
+                        <div className="list-group">
+                            <a href="#" className="list-group-item list-group-item-action active">
+                                Categories
+                            </a>
+                            {
+                                this.state.categories.map(
+                                    categories =>
+                                        <tr key={categories}>
+                                            <a href="#" className="list-group-item list-group-item-action"
+                                               onClick={() => this.listProductByCategory(categories)}>{categories}</a>
+                                        </tr>
+                                )
+                            }
+                        </div>
                     </div>
                     <div className="col-5">
                         <div className="container-fluid d-flex justify-content-center">

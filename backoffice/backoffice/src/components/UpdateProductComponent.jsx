@@ -7,11 +7,12 @@ class UpdateProductComponent extends Component {
 
         this.state = {
             id: this.props.match.params.id,
+            category: '',
             productName:'',
             description: '',
             price: ''
         }
-        
+        this.changeCategoryHandler = this.changeCategoryHandler.bind(this);
         this.changeProductNameHandler = this.changeProductNameHandler.bind(this);
         this.changeDescriptionHandler = this.changeDescriptionHandler.bind(this);
         this.changePriceHandler = this.changePriceHandler.bind(this);
@@ -20,12 +21,13 @@ class UpdateProductComponent extends Component {
 
     componentDidMount() {
         ProductService.getProductById(this.state.id).then((res) => {
-            let Product = res.data;
+            let product = res.data;
             this.setState({
-                id: Product.id,
-                productName: Product.productName,
-                description: Product.description,
-                price: Product.price
+                id: product.id,
+                category: product.category,
+                productName: product.productName,
+                description: product.description,
+                price: product.price
             });
         });
     }
@@ -34,6 +36,7 @@ class UpdateProductComponent extends Component {
         e.preventDefault();
         let Product = {
             id: this.state.id,
+            category:this.state.category,
             productName: this.state.productName,
             description: this.state.description,
             price: this.state.price
@@ -44,6 +47,10 @@ class UpdateProductComponent extends Component {
         });
 
     }
+    changeCategoryHandler = (event) =>{
+        this.setState({category: event.target.value})
+    }
+
     changeIdHandler = (event) => {
         this.setState({id: event.target.value})
     }
@@ -71,11 +78,15 @@ class UpdateProductComponent extends Component {
                             <h3 className="text-center">Update Product</h3>
                             <div className="card-body">
                                 <form>
-                                    
+                                    <div className="form-group">
+                                        <label> Category </label>
+                                        <input placeholder="Product Name" name="productName" className="form-control"
+                                               value={this.state.category} onChange={this.changeCategoryHandler}/>
+                                    </div>
                                     <div className="form-group">
                                         <label> Product Name </label>
                                         <input placeholder="Product Name" name="productName" className="form-control"
-                                               value={this.state.title} onChange={this.changeProductNameHandler}/>
+                                               value={this.state.productName} onChange={this.changeProductNameHandler}/>
                                     </div>
                                     <div className="form-group">
                                         <label> Description </label>
@@ -85,7 +96,7 @@ class UpdateProductComponent extends Component {
                                     <div className="form-group">
                                         <label> Price </label>
                                         <input placeholder="Product Price" name="price" className="form-control"
-                                               value={this.state.urlToImage} onChange={this.changePriceHandler}/>
+                                               value={this.state.price} onChange={this.changePriceHandler}/>
                                     </div>
                                     <button className="btn btn-success" onClick={this.updateProduct}> Update</button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)}
