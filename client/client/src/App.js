@@ -2,15 +2,17 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import ListProductComponent from './componenets/ListProductComponent'
-import HeaderComponent from './componenets/HeaderComponent'
+import LoginComponent from "./componenets/LoginComponent";
+import HomePage from "./componenets/HomePage";
 
 function App() {
     return (
         <div>
             <Router>
-                <HeaderComponent/>
                     <Switch>
-                        <Route path="/" exact component={ListProductComponent}></Route>
+
+                        <Route path="/" exact component={LoginComponent}></Route>
+                        <Route path="/homepage"  component={HomePage}></Route>
                         <Route path="/products" component={ListProductComponent}></Route>
                     </Switch>
             </Router>

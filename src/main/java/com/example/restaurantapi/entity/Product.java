@@ -1,4 +1,4 @@
-package com.example.restaurantapi.Model;
+package com.example.restaurantapi.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import UserService from "../services/UserService";
+import HeaderComponent from "./HeaderComponent";
 
 class ListUserComponent extends Component {
     constructor(props) {
@@ -19,6 +20,9 @@ class ListUserComponent extends Component {
     }
 
     componentDidMount(){
+        if(localStorage.getItem("username") ==null && localStorage.getItem("password") == null ){
+            this.props.history.push('/');
+        }
         UserService.listAllUser().then(res =>{
             this.setState({users:res.data})
         });
@@ -27,21 +31,24 @@ class ListUserComponent extends Component {
         this.props.history.push(`/updateUser/${id}`);
     }
 
+    addUser=(e)=>{
+        this.props.history.push('/newperson');
+    }
 
 
     render() {
         return (
             <div>
-                <h2 className="text-center">Product List</h2>
-                {/*<div className="row">
-                    <button style={{marginBottom: "10px"}} className="btn btn-primary" onClick={this.addUser}>Add Product</button>
-                </div>*/}
+                <HeaderComponent/>
+                <div className="row">
+                    <button style={{marginBottom: "10px"}} className="btn btn-primary"onClick={this.addUser} >Add User</button>
+                </div>
                 <div className="row">
                     <table className="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>FirstName</th>
-                            <th>LastName</th>
+                            <th>username</th>
+                            <th>password</th>
                             <th>Role</th>
                             <th>Actions</th>
                         </tr>
@@ -51,8 +58,8 @@ class ListUserComponent extends Component {
                             this.state.users.map(
                                 user =>
                                     <tr key={user.id}>
-                                        <td>{user.firstName}</td>
-                                        <td>{user.lastName}</td>
+                                        <td>{user.username}</td>
+                                        <td>{user.password}</td>
                                         <td>{user.role}</td>
                                         <td>
                                             <button onClick={() => this.editUser(user.id)}

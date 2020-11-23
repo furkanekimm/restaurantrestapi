@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import UserService from "../services/UserService";
+import HeaderComponent from "./HeaderComponent";
 
 class UpdateUserComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
             id: this.props.match.params.id,
-            firstName:'',
-            lastName:'',
+            username:'',
+            password:'',
             role:''
         }
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
+        this.changeusernameHandler = this.changeusernameHandler.bind(this);
+        this.changepasswordHandler = this.changepasswordHandler.bind(this);
         this.changeRoleHandler = this.changeRoleHandler.bind(this);
         this.updateUser = this.updateUser.bind(this);
     }
@@ -20,8 +21,8 @@ class UpdateUserComponent extends Component {
            let user = res.data;
            this.setState({
                id:user.id,
-               firstName:user.firstName,
-               lastName:user.lastName,
+               username:user.username,
+               password:user.password,
                role:user.role
            });
         });
@@ -30,32 +31,33 @@ class UpdateUserComponent extends Component {
         e.preventDefault();
         let User ={
             id:this.state.id,
-            firstName:this.state.firstName,
-            lastName:this.state.lastName,
+            username:this.state.username,
+            password:this.state.password,
             role:this.state.role
         };
         UserService.updateUser(User).then(res=>{
            this.props.history.push('/listuser')
         });
     }
-    changeFirstNameHandler = (event) =>{
+    changeusernameHandler = (event) =>{
         this.setState({id: event.target.value})
     }
 
-    changeLastNameHandler = (event) =>{
-        this.setState({firstName: event.target.value})
+    changepasswordHandler = (event) =>{
+        this.setState({username: event.target.value})
     }
 
     changeRoleHandler = (event) =>{
         this.setState({role: event.target.value})
     }
     cancel() {
-        this.props.history.push('/');
+        this.props.history.push('/listuser');
     }
 
     render() {
         return (
             <div>
+                <HeaderComponent/>
                 <div className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
@@ -64,14 +66,14 @@ class UpdateUserComponent extends Component {
                                 <form>
 
                                     <div className="form-group">
-                                        <label> FirstName </label>
-                                        <input placeholder="FirstName" name="firstName" className="form-control"
-                                               value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
+                                        <label> username </label>
+                                        <input placeholder="username" name="username" className="form-control"
+                                               value={this.state.username} onChange={this.changeusernameHandler}/>
                                     </div>
                                     <div className="form-group">
-                                        <label> LastName </label>
-                                        <input placeholder="LastName" name="lastName" className="form-control"
-                                               value={this.state.lastName} onChange={this.changeLastNameHandler}/>
+                                        <label> password </label>
+                                        <input placeholder="password" name="password" className="form-control" type="password"
+                                               value={this.state.password} onChange={this.changepasswordHandler}/>
                                     </div>
                                     <div className="form-group">
                                         <label> Role </label>

@@ -1,7 +1,7 @@
 package com.example.restaurantapi.services;
 
-import com.example.restaurantapi.Model.Cart;
-import com.example.restaurantapi.repository.CartRepository;
+import com.example.restaurantapi.entity.Cart;
+import com.example.restaurantapi.entity.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

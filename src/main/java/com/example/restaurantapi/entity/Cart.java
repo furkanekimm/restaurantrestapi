@@ -1,4 +1,4 @@
-package com.example.restaurantapi.Model;
+package com.example.restaurantapi.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -9,9 +9,6 @@ import javax.persistence.Id;
 
 
 import java.sql.Timestamp;
-
-import static java.lang.System.currentTimeMillis;
-
 @Entity
 public class Cart {
     @Id

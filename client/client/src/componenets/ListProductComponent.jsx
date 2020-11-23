@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ProductService from '../services/ProductService';
 import './card-style.css';
 import nextId from "react-id-generator";
+import HeaderComponent from "./HeaderComponent";
 
 class ListProductComponent extends Component {
     constructor(props) {
@@ -81,6 +82,9 @@ class ListProductComponent extends Component {
     }
 
     componentDidMount() {
+        if(localStorage.getItem("username") ==null && localStorage.getItem("password") == null ){
+            this.props.history.push('/');
+        }
         ProductService.listAllCategory().then((res) => {
             this.setState({categories: res.data});
         });
@@ -88,9 +92,12 @@ class ListProductComponent extends Component {
 
     render() {
         return (
+            <div>
+                <HeaderComponent/>
             <div className="container">
+
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-md-2">
                         <div className="list-group">
                             <a href="#" className="list-group-item list-group-item-action active">
                                 Categories
@@ -106,13 +113,13 @@ class ListProductComponent extends Component {
                             }
                         </div>
                     </div>
-                    <div className="col-5">
+                    <div className="col-md-5">
                         <div className="container-fluid d-flex justify-content-center">
                             <div className="row">
                                 {
                                     this.state.products.map(
                                         products =>
-                                            <div style={{marginBottom: "20px"}} className="col-md-4">
+                                            <div style={{marginBottom: "20px"}} className="col-md-5">
                                                 <div className="card text-center">
                                                     <div className="overflow">
                                                         <img src="http://placehold.jp/300x300.png" alt="Image1"
@@ -134,7 +141,7 @@ class ListProductComponent extends Component {
 
                         </div>
                     </div>
-                    <div className="col-5">
+                    <div className="col-md-5">
                         <table className="table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -169,10 +176,9 @@ class ListProductComponent extends Component {
                             </tbody>
                             <thead>
                             <tr>
-                                <th></th>
-                                <th></th>
-                                <th>Total</th>
-                                <th>{this.state.totalCart} ₺</th>
+
+                                <th colSpan="2"></th>
+                                <th colSpan="2">Total {this.state.totalCart} ₺</th>
                                 <th>
                                     <button className="btn btn-outline-danger"
                                             onClick={() => this.saleButton(this.state.carts)}>Payment
@@ -184,7 +190,7 @@ class ListProductComponent extends Component {
                     </div>
                 </div>
             </div>
-
+            </div>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProductService from "../services/ProductService";
+import HeaderComponent from "./HeaderComponent";
 
 class UpdateProductComponent extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class UpdateProductComponent extends Component {
         };
         console.log('Product => ' + JSON.stringify(Product));
         ProductService.updateProduct(Product, this.state.id).then(res => {
-            this.props.history.push('/')
+            this.props.history.push('/product')
         });
 
     }
@@ -66,12 +67,13 @@ class UpdateProductComponent extends Component {
     }
 
     cancel() {
-        this.props.history.push('/');
+        this.props.history.push('/product');
     }
 
     render() {
         return (
             <div>
+                <HeaderComponent/>
                 <div className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">

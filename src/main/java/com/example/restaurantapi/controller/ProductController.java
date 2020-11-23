@@ -1,6 +1,6 @@
-package com.example.restaurantapi.Controller;
+package com.example.restaurantapi.controller;
 
-import com.example.restaurantapi.Model.Product;
+import com.example.restaurantapi.entity.Product;
 import com.example.restaurantapi.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/productsControl")
+@RequestMapping("/product")
 @CrossOrigin(origins = "*")
-public class ManagerController {
+public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+
 
     @PostMapping("/add")
     public void addProduct(@RequestBody Product product){
@@ -21,25 +23,35 @@ public class ManagerController {
     }
 
     @GetMapping("/")
-    public List<Product> listAllNews() {
+    public List<Product> listAllProduct() {
         return productService.listAllProduct();
     }
 
 
     @GetMapping("/{id}")
-    public Product getNewsById(@PathVariable Long id) {
+    public Product getProductById(@PathVariable Long id) {
         return productService.getProductById(id);
     }
 
 
-    @DeleteMapping("/{id}")
-    public void deleteNews(@PathVariable Long id) {
+    @DeleteMapping("/delete/{id}")
+    public void deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
     }
 
     @PutMapping("/update/")
-    public Product updateNews(@RequestBody Product product) {
+    public Product updateProduct(@RequestBody Product product) {
         return productService.updateProduct(product);
+    }
+
+    @GetMapping("/category/product")
+    public List<Product> findProductByCategory(@RequestParam String category){
+        return productService.findProductNameByCategory(category);
+    }
+
+    @GetMapping("/category")
+    public List<String> findAllCategory(){
+        return productService.findAllCategory();
     }
 
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProductService from '../services/ProductService';
+import HeaderComponent from "./HeaderComponent";
 
 class ListProductComponent extends Component {
     constructor(props){
@@ -17,26 +18,32 @@ class ListProductComponent extends Component {
             this.setState({products: this.state.products.filter(products => products.id !== id)});
         });
     }
-   /* addProduct() {
+    addProduct=(e)=> {
         this.props.history.push('/add');
-    }*/
+    }
     editProduct(id) {
         this.props.history.push(`/update/${id}`);
     }
 
     componentDidMount() {
+        if(localStorage.getItem("username") ==null && localStorage.getItem("password") == null ){
+            this.props.history.push('/');
+        }
         ProductService.listAllProduct().then((res) => {
             this.setState({products: res.data});
         });
     }
     render() {
         return (
+
             <div>
-                <h2 className="text-center">Product List</h2>
-                {/*<div className="row">
-                    <button style={{marginBottom: "10px"}} className="btn btn-primary" onClick={this.addProduct}>Add Product</button>
-                </div>*/}
+                <HeaderComponent/>
+                <div className="container">
                 <div className="row">
+                    <button style={{marginBottom: "10px"}} className="btn btn-primary" onClick={this.addProduct}>Add Product</button>
+                </div>
+                <div className="row">
+                    <div className="col-sm-12">
                     <table className="table table-striped table-bordered">
                         <thead>
                         <tr>
@@ -69,8 +76,9 @@ class ListProductComponent extends Component {
                         }
                         </tbody>
                     </table>
+                    </div>
                 </div>
-
+                </div>
 
             </div>
         );
